@@ -19,12 +19,16 @@ public class Group implements Iterable<Student> {
 
     public void addStudentToGroup (Student newMember) {
         members.add(newMember);
-        getStudents().stream().forEach(s -> s.addCollaborator(newMember));
-        newMember.addCollaborators(getStudents());
+        members.stream().forEach(s -> s.addCollaborator(newMember));
+        newMember.addCollaborators(members);
     }
 
     public boolean isFull () {
         return numStudents == members.size();
+    }
+    
+    public boolean isEmpty() {
+    	return members.size() == 0;
     }
 
     @Override
@@ -32,14 +36,10 @@ public class Group implements Iterable<Student> {
         return members.iterator();
     }
 
-    public List<Student> getStudents () {
-        return members;
-    }
-
     public void removeStudent (Student student) {
         members.remove(student);
-        student.removeCollaborators(getStudents());
-        getStudents().stream().forEach(s -> s.removeCollaborator(student));
+        student.removeCollaborators(members);
+        members.stream().forEach(s -> s.removeCollaborator(student));
     }
     
     public boolean equals (Object o) {

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,9 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 public class GroupGenerator {
@@ -52,7 +55,10 @@ public class GroupGenerator {
 
     private void generateGrouping (SectionGrouping grouping) throws Exception {
         Queue<Group> groupsToGenerate = new LinkedList<>();
-        groupsToGenerate.addAll(grouping.getGroups());
+        Iterator<Group> groups = grouping.iterator();
+        while (groups.hasNext()){
+        	groupsToGenerate.add(groups.next());
+        }
         while (groupsToGenerate.size() != 0) {
             generateGroupForGrouping(groupsToGenerate, grouping);
         }
@@ -83,11 +89,11 @@ public class GroupGenerator {
                                 .collect(Collectors.toList());
                 if (availableStudents.size() == 0) {
                     groupsToGenerate.add(group);
-                    Group unluckyGroup = chooseAtRandom(grouping.getGroups());
-                    while (unluckyGroup.getStudents().size() == 0) {
-                        unluckyGroup = chooseAtRandom(grouping.getGroups());
+                    Group unluckyGroup = chooseAtRandom(grouping.iterator());
+                    while (unluckyGroup.isEmpty()) {
+                        unluckyGroup = chooseAtRandom(grouping.iterator());
                     }
-                    Student unluckyStudent = chooseAtRandom(unluckyGroup.getStudents());
+                    Student unluckyStudent = chooseAtRandom(unluckyGroup.iterator());
                     unluckyGroup.removeStudent(unluckyStudent);
                     groupsToGenerate.add(unluckyGroup);
                     numAttempts++;
@@ -112,6 +118,12 @@ public class GroupGenerator {
         if (toChooseFrom.size() == 1) { return toChooseFrom.get(0); }
         int randomIndex = random.nextInt(toChooseFrom.size());
         return toChooseFrom.get(randomIndex);
+    }
+    
+    private <T> T chooseAtRandom (Iterator<T> toChooseFrom) {
+        Iterable<T> iterable = () -> toChooseFrom;
+        return StreamSupport.stream(iterable.spliterator(), false).findAny().get();
+        // TODO: consider doing reservoir sampling to make use of the random object
     }
 
     private void generateOutput () {
@@ -211,7 +223,7 @@ public class GroupGenerator {
                 generator.generateGroups();
             }
             catch (Exception e) {
-                // ignore, try again
+                // i)gnore, try again
                 generator = new GroupGenerator(NUM_GROUPINGS, students);
                 System.out.println("numIterations: " + i);
             }

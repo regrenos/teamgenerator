@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class SectionGrouping implements Iterable<Group> {
 
-    public static final int PREFERRED_GROUP_SIZE = 3;
+    public static final int DEFAULT_PREFERRED_GROUP_SIZE = 3;
     private List<Group> groups;
     private List<Student> unassignedStudents;
 
@@ -19,11 +19,11 @@ public class SectionGrouping implements Iterable<Group> {
         groups = new ArrayList<>();
 
         int numStudents = studentList.size();
-        int numGroups = numStudents / PREFERRED_GROUP_SIZE;
-        int numLargerGroups = numStudents % PREFERRED_GROUP_SIZE;
+        int numGroups = numStudents / DEFAULT_PREFERRED_GROUP_SIZE;
+        int numLargerGroups = numStudents % DEFAULT_PREFERRED_GROUP_SIZE;
 
         for (int i = 0; i < numGroups; i++) {
-            groups.add(new Group(PREFERRED_GROUP_SIZE + (numLargerGroups > 0 ? 1 : 0)));
+            groups.add(new Group(DEFAULT_PREFERRED_GROUP_SIZE + (numLargerGroups > 0 ? 1 : 0)));
             numLargerGroups--;
         }
     }
@@ -33,7 +33,7 @@ public class SectionGrouping implements Iterable<Group> {
         for (Student s : students) {
             boolean studentValue = false;
             for (Group g : groups) {
-                studentValue = g.containsStudent(s);
+                studentValue = studentValue | g.containsStudent(s);
             }
             returnValue = returnValue && studentValue;
         }
@@ -42,10 +42,6 @@ public class SectionGrouping implements Iterable<Group> {
 
     public void addGroup (Group group) {
         groups.add(group);
-    }
-
-    public List<Group> getGroups () {
-        return groups;
     }
 
     public List<Student> getSubsetOfUnassignedStudents (Predicate<Student> filter) {
