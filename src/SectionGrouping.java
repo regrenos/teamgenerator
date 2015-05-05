@@ -12,7 +12,7 @@ public class SectionGrouping implements Iterable<Group> {
     private List<Group> groups;
     private List<Student> unassignedStudents;
 
-    public SectionGrouping (List<Student> studentList) {
+    public SectionGrouping(List<Student> studentList) {
         unassignedStudents = new ArrayList<>();
         unassignedStudents.addAll(studentList);
 
@@ -28,7 +28,7 @@ public class SectionGrouping implements Iterable<Group> {
         }
     }
 
-    public boolean areStudentsGrouped (Set<Student> students) {
+    public boolean areStudentsGrouped(Set<Student> students) {
         boolean returnValue = true;
         for (Student s : students) {
             boolean studentValue = false;
@@ -40,24 +40,24 @@ public class SectionGrouping implements Iterable<Group> {
         return returnValue;
     }
 
-    public void addGroup (Group group) {
+    public void addGroup(Group group) {
         groups.add(group);
     }
 
-    public List<Student> getSubsetOfUnassignedStudents (Predicate<Student> filter) {
+    public List<Student> getSubsetOfUnassignedStudents(Predicate<Student> filter) {
         return unassignedStudents.stream().filter(filter).collect(Collectors.toList());
     }
 
-    public void removeStudentFromEligibility (Student student) {
+    public void removeStudentFromEligibility(Student student) {
         unassignedStudents.remove(student);
     }
 
-    public void addEligibleStudent (Student student) {
+    public void addEligibleStudent(Student student) {
         unassignedStudents.add(student);
     }
 
     @Override
-    public Iterator<Group> iterator () {
+    public Iterator<Group> iterator() {
         return groups.iterator();
     }
 }

@@ -1,22 +1,5 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collector;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -34,7 +17,7 @@ public class GroupGenerator {
     private int numAttempts;
     private int numReassignments;
 
-    public GroupGenerator (int numGroupings, List<Student> studentList) {
+    public GroupGenerator(int numGroupings, List<Student> studentList) {
         random = new Random();
         groupings = new ArrayList<>();
         for (int i = 0; i < numGroupings; i++) {
@@ -47,25 +30,24 @@ public class GroupGenerator {
         numReassignments = 0;
     }
 
-    private void generateGroups () throws Exception {
+    private void generateGroups() throws Exception {
         for (SectionGrouping grouping : groupings) {
             generateGrouping(grouping);
         }
     }
 
-    private void generateGrouping (SectionGrouping grouping) throws Exception {
+    private void generateGrouping(SectionGrouping grouping) throws Exception {
         Queue<Group> groupsToGenerate = new LinkedList<>();
-        Iterator<Group> groups = grouping.iterator();
-        while (groups.hasNext()){
-        	groupsToGenerate.add(groups.next());
+        for (Group group : grouping) {
+            groupsToGenerate.add(group);
         }
         while (groupsToGenerate.size() != 0) {
             generateGroupForGrouping(groupsToGenerate, grouping);
         }
     }
 
-    private void generateGroupForGrouping (Queue<Group> groupsToGenerate, SectionGrouping grouping)
-                                                                                                   throws Exception {
+    private void generateGroupForGrouping(Queue<Group> groupsToGenerate, SectionGrouping grouping)
+            throws Exception {
         Group group = groupsToGenerate.poll();
         while (!group.isFull()) {
             Set<Student> collaborators = new HashSet<>();
@@ -77,13 +59,13 @@ public class GroupGenerator {
             Student chosenStudent;
             if (availableStudents.size() != 0) {
                 chosenStudent = chooseAtRandom(availableStudents);
-            }
-            else if (numRepairings < NUM_ALLOWED_REPAIRINGS) {
+            } else if (numRepairings < NUM_ALLOWED_REPAIRINGS) {
                 chosenStudent = chooseAtRandom(grouping.getSubsetOfUnassignedStudents(s -> true));
                 numRepairings++;
-            }
-            else {
-                if (numReassignments >= NUM_ALLOWED_REASSIGNMENTS) { throw new Exception(); }
+            } else {
+                if (numReassignments >= NUM_ALLOWED_REASSIGNMENTS) {
+                    throw new Exception();
+                }
                 availableStudents =
                         students.stream().filter(s -> !collaborators.contains(s))
                                 .collect(Collectors.toList());
@@ -97,7 +79,9 @@ public class GroupGenerator {
                     unluckyGroup.removeStudent(unluckyStudent);
                     groupsToGenerate.add(unluckyGroup);
                     numAttempts++;
-                    if (numAttempts >= NUM_ALLOWED_ATTEMPTS) { throw new Exception(); }
+                    if (numAttempts >= NUM_ALLOWED_ATTEMPTS) {
+                        throw new Exception();
+                    }
                     return;
                 }
                 chosenStudent = chooseAtRandom(availableStudents);
@@ -114,34 +98,36 @@ public class GroupGenerator {
         }
     }
 
-    private <T> T chooseAtRandom (List<T> toChooseFrom) {
-        if (toChooseFrom.size() == 1) { return toChooseFrom.get(0); }
+    private <T> T chooseAtRandom(List<T> toChooseFrom) {
+        if (toChooseFrom.size() == 1) {
+            return toChooseFrom.get(0);
+        }
         int randomIndex = random.nextInt(toChooseFrom.size());
         return toChooseFrom.get(randomIndex);
     }
-    
-    private <T> T chooseAtRandom (Iterator<T> toChooseFrom) {
+
+    private <T> T chooseAtRandom(Iterator<T> toChooseFrom) {
         Iterable<T> iterable = () -> toChooseFrom;
         return StreamSupport.stream(iterable.spliterator(), false).findAny().get();
         // TODO: consider doing reservoir sampling to make use of the random object
     }
 
-    private void generateOutput () {
+    private void generateOutput() {
         int index = 2;
         for (SectionGrouping grouping : groupings) {
             BufferedWriter writer = null;
             try {
-                File outputFile = new File("output" + (index+1) + ".tex");
+                File outputFile = new File("output" + (index + 1) + ".tex");
                 writer = new BufferedWriter(new FileWriter(outputFile));
 
                 writer.write("\\documentclass{article}\n" + "\\usepackage{multirow}\n"
-                             + "\\usepackage{vmargin}\n" + "\\usepackage{tikz}\n"
-                             + "\\usepackage{caption}\n" + "\\usepackage{microtype}\n"
-                             + "\\setpapersize{USletter}\n"
-                             + "\\setmarginsrb{1in}{.5in}{1in}{0.25in}{12pt}{11mm}{0pt}{11mm}\n"
-                             + "\\begin{document}\n" + "\\renewcommand{\\arraystretch}{1.2} \n");
-                writer.write("\\begin{center}\n" + "{\\Large Design Challenge: " + (index+1) +
-                             "\\\\ \n" + "Group Assignments} \\\\ \n");
+                        + "\\usepackage{vmargin}\n" + "\\usepackage{tikz}\n"
+                        + "\\usepackage{caption}\n" + "\\usepackage{microtype}\n"
+                        + "\\setpapersize{USletter}\n"
+                        + "\\setmarginsrb{1in}{.5in}{1in}{0.25in}{12pt}{11mm}{0pt}{11mm}\n"
+                        + "\\begin{document}\n" + "\\renewcommand{\\arraystretch}{1.2} \n");
+                writer.write("\\begin{center}\n" + "{\\Large Design Challenge: " + (index + 1) +
+                        "\\\\ \n" + "Group Assignments} \\\\ \n");
                 writer.write("\\begin{tabular}{|c|} \\hline \n");
                 int i = 0;
                 for (Group g : grouping) {
@@ -158,15 +144,12 @@ public class GroupGenerator {
                 writer.write("\\end{tabular} \\\\ \n");
 
                 writer.write("\\end{center}\n" + "\\end{document}");
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // cry
-            }
-            finally {
+            } finally {
                 try {
                     writer.close();
-                }
-                catch (IOException e) {
+                } catch (IOException | NullPointerException e) {
                     // cry again
                 }
             }
@@ -174,10 +157,10 @@ public class GroupGenerator {
         }
     }
 
-    public void printCollaborators () {
+    public void printCollaborators() {
         for (Student student : students) {
             List<String> collaborators =
-                    student.getCollaborators().stream().map(s -> s.getName())
+                    student.getCollaborators().stream().map(Student::getName)
                             .collect(Collectors.toList());
             Collections.sort(collaborators);
             System.out.print(student + ": ");
@@ -185,7 +168,7 @@ public class GroupGenerator {
         }
     }
 
-    public static void main (String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         Map<String, Student> studentMapping = new HashMap<>();
         List<Student> students = new ArrayList<>();
 
@@ -193,7 +176,7 @@ public class GroupGenerator {
         while (scanner.hasNextLine()) {
             String data = scanner.nextLine();
             String[] names = data.replaceAll("\"", "").split(",");
-            String[] name = { names[0], names[1] };
+            String[] name = {names[0], names[1]};
             Student newStudent = new Student(name[1], name[0]);
             studentMapping.put(Arrays.asList(name).stream().collect(Collectors.joining()), newStudent);
             students.add(newStudent);
@@ -205,12 +188,12 @@ public class GroupGenerator {
         while (secondScanner.hasNextLine()) {
             String data = secondScanner.nextLine();
             String[] names = data.replaceAll("\"", "").split(",");
-            String[] name = { names[0], names[1] };
+            String[] name = {names[0], names[1]};
             Student student = studentMapping.get(Arrays.asList(name).stream().collect(Collectors.joining()));
-            boolean sontains = studentMapping.containsKey(Arrays.asList(name).stream().collect(Collectors.joining()));
+            boolean contains = studentMapping.containsKey(Arrays.asList(name).stream().collect(Collectors.joining()));
             String[] collaborators = Arrays.copyOfRange(names, 2, names.length);
             for (int i = 0; i < collaborators.length; i += 2) {
-                String[] collaboratorName = {collaborators[i], collaborators[i+1]};
+                String[] collaboratorName = {collaborators[i], collaborators[i + 1]};
                 boolean sa = studentMapping.containsKey(Arrays.asList(collaboratorName).stream().collect(Collectors.joining()));
                 student.addCollaborator(studentMapping.get(Arrays.asList(collaboratorName).stream().collect(Collectors.joining())));
             }
@@ -221,8 +204,7 @@ public class GroupGenerator {
         for (int i = 0; i < 1000; i++) {
             try {
                 generator.generateGroups();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // i)gnore, try again
                 generator = new GroupGenerator(NUM_GROUPINGS, students);
                 System.out.println("numIterations: " + i);

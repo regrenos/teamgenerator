@@ -9,21 +9,21 @@ public class Student {
     private String lastName;
     private List<Student> priorCollaborators;
 
-    public Student (String first, String last) {
+    public Student(String first, String last) {
         firstName = first;
         lastName = last;
         priorCollaborators = new ArrayList<>();
     }
 
-    public boolean hasCollaborated (Student other) {
+    public boolean hasCollaborated(Student other) {
         return priorCollaborators.contains(other);
     }
 
-    public List<Student> getCollaborators () {
+    public List<Student> getCollaborators() {
         return priorCollaborators;
     }
 
-    public boolean equals (Object o) {
+    public boolean equals(Object o) {
         if (o instanceof Student) {
             Student s = (Student) o;
             return firstName.equalsIgnoreCase(s.firstName) && lastName.equalsIgnoreCase(s.lastName);
@@ -31,36 +31,36 @@ public class Student {
         return false;
     }
 
-    public int hashCode () {
+    public int hashCode() {
         return firstName.hashCode() * 17 + lastName.hashCode() * 31;
     }
 
-    public void addCollaborators (List<Student> students) {
-        students.stream().forEach(s -> addCollaborator(s));
+    public void addCollaborators(List<Student> students) {
+        students.stream().forEach(this::addCollaborator);
     }
 
-    public void removeCollaborators (List<Student> students) {
+    public void removeCollaborators(List<Student> students) {
         priorCollaborators.removeAll(students);
     }
-    
-    public String getName () {
-        List<String> name = new ArrayList<String>();
+
+    public String getName() {
+        List<String> name = new ArrayList<>();
         name.add(firstName);
         name.add(lastName);
         return name.stream().collect(Collectors.joining(" "));
     }
-    
-    public String toString(){
+
+    public String toString() {
         return getName();
     }
 
-    public void addCollaborator (Student chosenStudent) {
-        if(!chosenStudent.equals(this)){
+    public void addCollaborator(Student chosenStudent) {
+        if (!chosenStudent.equals(this)) {
             priorCollaborators.add(chosenStudent);
         }
     }
 
-    public void removeCollaborator (Student student) {
+    public void removeCollaborator(Student student) {
         priorCollaborators.remove(student);
     }
 
