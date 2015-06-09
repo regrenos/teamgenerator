@@ -1,3 +1,5 @@
+package pkg;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +13,11 @@ public class Group implements Iterable<Student> {
     public Group(int size) {
         numStudents = size;
         members = new ArrayList<>();
+    }
+
+    public Group(List<Student> students) {
+        this(students.size());
+        students.stream().forEach(this::addStudentToGroup);
     }
 
     public boolean containsStudent(Student student) {
