@@ -1,7 +1,6 @@
 package parsing;
 
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
@@ -14,21 +13,21 @@ import java.util.List;
 
 /**
  * This parser uses the Apache POI Library to parse XLSX files.
- *
+ * <p>
  * Created by steve on 6/14/15.
  */
-public class XLSXParser extends XLSParser implements Parser {
+public class XLSXParser extends XLSParser {
 
     private StudentStrategy studentStrategy;
     private GroupStrategy groupStrategy;
 
     public XLSXParser() {
-        studentStrategy = new DefaultStudentStrategy();
-        groupStrategy = new DefaultGroupStrategy();
+        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
     }
 
-    private List<List<String>> getValidCells(InputStream file) throws IOException {
-        return getValidCells(getSheetFromFile(file));
+    public XLSXParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy){
+        this.studentStrategy = studentStrategy;
+        this.groupStrategy = groupStrategy;
     }
 
     @Override
