@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa2bbacc-0bc2-44c2-977e-fb5486796b6d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_groups_default.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_groups_default.xls" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_groups_default.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_students_default.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_students_default.xls" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/test_students_default.xlsx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/parsing/strategy/defaults/DefaultGroupStrategy.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/parsing/strategy/defaults/DefaultGroupStrategy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/test/parsing/strategy/defaults/DefaultGroupStrategyTest.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/test/parsing/strategy/defaults/DefaultGroupStrategyTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/test/parsing/strategy/defaults/DefaultStudentStrategyTest.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/test/parsing/strategy/defaults/DefaultStudentStrategyTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/pkg/Group.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/pkg/Group.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/pkg/GroupGenerator.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/pkg/GroupGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teamgenerator/parsing/XLSParser.class" afterPath="$PROJECT_DIR$/out/production/teamgenerator/parsing/XLSParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/parsing/strategy/defaults/DefaultGroupStrategyTest.java" afterPath="$PROJECT_DIR$/src/test/parsing/strategy/defaults/DefaultGroupStrategyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/parsing/strategy/defaults/DefaultStudentStrategyTest.java" afterPath="$PROJECT_DIR$/src/test/parsing/strategy/defaults/DefaultStudentStrategyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parsing/Parser.java" afterPath="$PROJECT_DIR$/src/parsing/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pkg/Student.java" afterPath="$PROJECT_DIR$/src/pkg/Student.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parsing/XLSParser.java" afterPath="$PROJECT_DIR$/src/parsing/XLSParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamgenerator.iml" afterPath="$PROJECT_DIR$/teamgenerator.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="aa2bbacc-0bc2-44c2-977e-fb5486796b6d" name="Default" comment="" />
     <ignored path="teamgenerator.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -379,6 +358,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="defaults" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="teamgenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="teamgenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="out" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="production" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="teamgenerator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -742,6 +743,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
@@ -775,16 +782,16 @@
       <created>1433981670380</created>
       <option name="number" value="Default" />
       <updated>1433981670380</updated>
-      <workItem from="1433981671888" duration="12700000" />
+      <workItem from="1433981671888" duration="13322000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12700000" />
+    <option name="totallyTimeSpent" value="13322000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="29" y="-3" width="1337" height="771" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -797,7 +804,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3280116" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24981302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24981302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24981302" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
