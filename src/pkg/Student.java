@@ -1,3 +1,5 @@
+package pkg;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +12,8 @@ public class Student {
     private List<Student> priorCollaborators;
 
     public Student(String first, String last) {
-        firstName = first;
-        lastName = last;
+        firstName = first.trim();
+        lastName = last.trim();
         priorCollaborators = new ArrayList<>();
     }
 
@@ -24,6 +26,7 @@ public class Student {
     }
 
     public boolean equals(Object o) {
+        // TODO: assign ID numbers?
         if (o instanceof Student) {
             Student s = (Student) o;
             return firstName.equalsIgnoreCase(s.firstName) && lastName.equalsIgnoreCase(s.lastName);
