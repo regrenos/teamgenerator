@@ -4,19 +4,42 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+/**
+ * The {@link Group} has a certain size and contains {@link Student}s. The {@link Group} exposes an iterator for its'
+ * {@link Student}s.
+ */
 public class Group implements Iterable<Student> {
 
     private int numStudents;
     private List<Student> members;
 
+    /**
+     * Create a {@link Group} with a given size without any initial members.
+     * @param size the size of the {@link Group} to create
+     */
     public Group(int size) {
         numStudents = size;
         members = new ArrayList<>();
     }
 
+    /**
+     * Create a {@link Group} from a list of member {@link Student}s, pre-populating the {@link Group} and setting its'
+     * size to the size of the pre-populated list.
+     * @param students the students to use when populating the group
+     */
     public Group(List<Student> students) {
         this(students.size());
+        students.stream().forEach(this::addStudentToGroup);
+    }
+
+    /**
+     * Create a {@link Group} from a list of member {@link Student}s, pre-populating the {@link Group} but setting its'
+     * size to the given size.
+     * @param students the students to use when populating the group
+     * @param size the final desired size of the group
+     */
+    public Group(List<Student> students, int size) {
+        this(size);
         students.stream().forEach(this::addStudentToGroup);
     }
 
@@ -24,6 +47,11 @@ public class Group implements Iterable<Student> {
         return members.contains(student);
     }
 
+    /**
+     * Add a {@link Student} to this {@link Group}. Will add current {@link Group} members as collaborators to the given
+     * {@link Student} as well as adding the given {@link Student} as a collaborator for current members.
+     * @param newMember {@link Student} to add to the {@link Group}
+     */
     public void addStudentToGroup(Student newMember) {
         members.add(newMember);
         members.stream().forEach(s -> s.addCollaborator(newMember));
@@ -43,12 +71,24 @@ public class Group implements Iterable<Student> {
         return members.iterator();
     }
 
+    /**
+     * Remove a {@link Student} from this {@link Group}. Will remove current {@link Group} members as collaborators from
+     * the given {@link Student}, as well as removing the given {@link Student} as a collaborator from the current
+     * members of the {@link Group}.
+     * @param student {@link Student} to remove from the {@link Group}
+     */
     public void removeStudent(Student student) {
         members.remove(student);
         student.removeCollaborators(members);
         members.stream().forEach(s -> s.removeCollaborator(student));
     }
 
+    /**
+     * Determine if another {@link Object} equals this {@link Group}. {@link Group} equality necessiates that the
+     * {@link Group}s contain the same students, and that neither is a superset of the other.
+     * @param o {@link Object} to compare this {@link Group} to
+     * @return whether the {@link Object} equals this {@link Group}
+     */
     public boolean equals(Object o) {
         if (o instanceof Group) {
             Group g = (Group) o;
@@ -64,5 +104,4 @@ public class Group implements Iterable<Student> {
     public int hashCode() {
         return members.stream().mapToInt(Student::hashCode).sum();
     }
-
 }

@@ -1,10 +1,14 @@
 package pkg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * A {@link Student} holds identifying information about the student it represents, as well as a list of other
+ * {@link Student}s that this student has collaborated with.
+ */
 public class Student {
 
     private String firstName;
@@ -47,10 +51,7 @@ public class Student {
     }
 
     public String getName() {
-        List<String> name = new ArrayList<>();
-        name.add(firstName);
-        name.add(lastName);
-        return name.stream().collect(Collectors.joining(" "));
+        return Arrays.asList(firstName, lastName).stream().collect(Collectors.joining(" "));
     }
 
     public String toString() {
