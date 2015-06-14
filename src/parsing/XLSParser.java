@@ -4,6 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
 import parsing.strategy.defaults.DefaultGroupStrategy;
@@ -63,7 +64,7 @@ public class XLSParser implements Parser {
         return getValidCells(getSheetFromFile(file));
     }
 
-    private List<List<String>> getValidCells(HSSFSheet sheet) {
+    protected List<List<String>> getValidCells(Sheet sheet) {
         List<List<String>> validCells = new ArrayList<>();
         toFiniteStream(sheet.rowIterator())
                 .map(Row::cellIterator)
@@ -78,7 +79,7 @@ public class XLSParser implements Parser {
         return validCells;
     }
 
-    private boolean hasValidContent(Cell cell) {
+    protected boolean hasValidContent(Cell cell) {
         try {
             return cell.getStringCellValue().length() > 0;
         } catch (IllegalStateException e) {
@@ -86,12 +87,12 @@ public class XLSParser implements Parser {
         }
     }
 
-    private <T> Stream<T> toFiniteStream(Iterator<T> iterator) {
+    protected <T> Stream<T> toFiniteStream(Iterator<T> iterator) {
         Iterable<T> iterable = () -> iterator;
         return StreamSupport.stream(iterable.spliterator(), false);
     }
 
-    private HSSFSheet getSheetFromFile(InputStream file) throws IOException {
+    protected Sheet getSheetFromFile(InputStream file) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook(file);
         return workbook.getSheetAt(0);
     }

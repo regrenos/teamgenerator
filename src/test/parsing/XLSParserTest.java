@@ -16,7 +16,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -95,6 +94,7 @@ public class XLSParserTest {
 // TODO: make this test meaningful
 //        InputStream file = getClass().getResourceAsStream("test_students_default.xls");
 //
+//        XLSParser parser = new XLSParser();
 //        Method method = XLSParser.class.getMethod("parseSheetAsSectionGrouping", File.class);
 //        method.setAccessible(true);
 
@@ -117,7 +117,7 @@ public class XLSParserTest {
         Sheet sheet = workbook.getSheetAt(0);
 
         XLSParser parser = new XLSParser();
-        Method method = XLSParser.class.getDeclaredMethod("getValidCells", HSSFSheet.class);
+        Method method = XLSParser.class.getDeclaredMethod("getValidCells", Sheet.class);
         method.setAccessible(true);
 
         assertEquals(method.invoke(parser, sheet), desiredRows);
