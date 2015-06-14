@@ -7,9 +7,9 @@ import pkg.Student;
 import java.util.List;
 
 /**
- * This strategy is the default StudentStrategy, it assumes student names are in the first cell of each row,
- * with the cell text being "lastName, firstName."
- *
+ * This strategy is the default {@link StudentStrategy}, it assumes {@link pkg.Student} names are in the first cell of
+ * each row, with the cell text being "lastName, firstName."
+ * <p>
  * Created by steve on 6/8/15.
  */
 public class DefaultStudentStrategy implements StudentStrategy {
@@ -19,6 +19,6 @@ public class DefaultStudentStrategy implements StudentStrategy {
             return new EmptyStudent();
         }
         String[] fullName = row.get(0).split(",");
-        return new Student(fullName[1],fullName[0]);
+        return new Student(fullName[1], fullName[0]);
     }
 }
