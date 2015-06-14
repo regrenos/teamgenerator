@@ -1,6 +1,5 @@
 package parsing;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -9,10 +8,6 @@ import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
 import parsing.strategy.defaults.DefaultGroupStrategy;
 import parsing.strategy.defaults.DefaultStudentStrategy;
-import pkg.EmptyStudent;
-import pkg.Group;
-import pkg.SectionGrouping;
-import pkg.Student;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,39 +23,22 @@ import java.util.stream.StreamSupport;
  * <p>
  * Created by steve on 6/8/15.
  */
-public class XLSParser implements Parser {
+public class XLSParser extends Parser {
 
     private StudentStrategy studentStragegy;
     private GroupStrategy groupStrategy;
 
     public XLSParser() {
-        studentStragegy = new DefaultStudentStrategy();
-        groupStrategy = new DefaultGroupStrategy();
+        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
+    }
+
+    public XLSParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy) {
+        this.studentStrategy = studentStrategy;
+        this.groupStrategy = groupStrategy;
     }
 
     @Override
-    public List<Student> parseSheetOfStudents(InputStream file) throws IOException {
-        List<List<String>> validCells = getValidCells(file);
-        return validCells.stream()
-                .map(studentStragegy::interpretRow)
-                .filter(student -> !student.getClass().equals(EmptyStudent.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Group> parseSheetOfGroups(InputStream file) throws IOException {
-        List<List<String>> validCells = getValidCells(file);
-        return validCells.stream()
-                .map(groupStrategy::interpretRow)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public SectionGrouping parseSheetAsSectionGrouping(InputStream file) throws IOException {
-        return new SectionGrouping(this.parseSheetOfStudents(file));
-    }
-
-    private List<List<String>> getValidCells(InputStream file) throws IOException {
+    protected List<List<String>> getValidCells(InputStream file) throws IOException {
         return getValidCells(getSheetFromFile(file));
     }
 
