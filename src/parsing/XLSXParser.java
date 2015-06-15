@@ -18,16 +18,12 @@ import java.util.List;
  */
 public class XLSXParser extends XLSParser {
 
-    private StudentStrategy studentStrategy;
-    private GroupStrategy groupStrategy;
-
     public XLSXParser() {
-        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
+        super();
     }
 
-    public XLSXParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy){
-        this.studentStrategy = studentStrategy;
-        this.groupStrategy = groupStrategy;
+    public XLSXParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy) {
+        super(studentStrategy, groupStrategy);
     }
 
     @Override

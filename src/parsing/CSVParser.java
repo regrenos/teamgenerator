@@ -21,16 +21,12 @@ import java.util.stream.Collectors;
  */
 public class CSVParser extends Parser {
 
-    private StudentStrategy studentStrategy;
-    private GroupStrategy groupStrategy;
-
     public CSVParser() {
-        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
+        super();
     }
 
-    public CSVParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy){
-        this.studentStrategy = studentStrategy;
-        this.groupStrategy = groupStrategy;
+    public CSVParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy) {
+        super(studentStrategy, groupStrategy);
     }
 
     @Override
@@ -39,7 +35,7 @@ public class CSVParser extends Parser {
         String line;
         List<List<String>> validCells = new ArrayList<>();
         while ((line = reader.readLine()) != null) {
-            String[] cells = line.split(",");
+            String[] cells = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
             List<String> validRowCells = Arrays.asList(cells).stream()
                     .map(s -> s.replaceAll("[^a-zA-Z\\s,]", ""))
                     .filter(this::hasValidContent)
@@ -50,6 +46,6 @@ public class CSVParser extends Parser {
     }
 
     private boolean hasValidContent(String cell) {
-        return cell.matches("\\w,(\\s\\w)+");
+        return cell.matches("[\\w]+(,|)(\\s[\\w]+)+");
     }
 }

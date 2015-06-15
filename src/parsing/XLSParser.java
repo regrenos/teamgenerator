@@ -25,16 +25,12 @@ import java.util.stream.StreamSupport;
  */
 public class XLSParser extends Parser {
 
-    private StudentStrategy studentStragegy;
-    private GroupStrategy groupStrategy;
-
-    public XLSParser() {
-        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
+    public XLSParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy) {
+        super(studentStrategy, groupStrategy);
     }
 
-    public XLSParser(StudentStrategy studentStrategy, GroupStrategy groupStrategy) {
-        this.studentStrategy = studentStrategy;
-        this.groupStrategy = groupStrategy;
+    public XLSParser() {
+        super();
     }
 
     @Override

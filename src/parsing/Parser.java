@@ -6,6 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
+import parsing.strategy.defaults.DefaultGroupStrategy;
+import parsing.strategy.defaults.DefaultStudentStrategy;
 import pkg.EmptyStudent;
 import pkg.Group;
 import pkg.SectionGrouping;
@@ -31,6 +33,15 @@ public abstract class Parser {
 
     private StudentStrategy studentStragegy;
     private GroupStrategy groupStrategy;
+
+    public Parser(StudentStrategy studentStragegy, GroupStrategy groupStrategy){
+        this.studentStragegy = studentStragegy;
+        this.groupStrategy = groupStrategy;
+    }
+
+    public Parser() {
+        this(new DefaultStudentStrategy(), new DefaultGroupStrategy());
+    }
 
     /**
      * Parse a (spread)sheet as a list of {@link pkg.Student}s.

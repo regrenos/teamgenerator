@@ -37,7 +37,8 @@ public class CSVParserTest {
 
         InputStream inputStream = getClass().getResourceAsStream("test_groups_default.csv");
         CSVParser parser = new CSVParser();
-        Method method = CSVParser.class.getMethod("getValidCells", InputStream.class);
+        Method method = CSVParser.class.getDeclaredMethod("getValidCells", InputStream.class);
+        method.setAccessible(true);
 
         assertEquals(method.invoke(parser, inputStream), desiredRows);
     }
@@ -49,13 +50,13 @@ public class CSVParserTest {
     @Test
     public void testHasValidContent() throws Exception {
         CSVParser parser = new CSVParser();
-        Method method = CSVParser.class.getMethod("hasValidContent", String.class);
+        Method method = CSVParser.class.getDeclaredMethod("hasValidContent", String.class);
         method.setAccessible(true);
 
         assertTrue((boolean) method.invoke(parser, "Smith, John"));
         assertTrue((boolean) method.invoke(parser, "Smith, John Jr"));
         assertTrue((boolean) method.invoke(parser, "Smith, John Abraham"));
         assertTrue((boolean) method.invoke(parser, "Smith, John Abraham Jr"));
-        assertFalse((boolean) method.invoke(parser, "Smith John"));
+        assertTrue((boolean) method.invoke(parser, "Smith John"));
     }
 } 
