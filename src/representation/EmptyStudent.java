@@ -1,4 +1,4 @@
-package pkg;
+package representation;
 
 /**
  * The {@link EmptyStudent} implements a null {@link Student} used for error-checking.

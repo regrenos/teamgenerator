@@ -2,8 +2,8 @@ package test.parsing.strategy.defaults;
 
 import org.junit.Test;
 import parsing.strategy.defaults.DefaultStudentStrategy;
-import pkg.EmptyStudent;
-import pkg.Student;
+import representation.EmptyStudent;
+import representation.Student;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

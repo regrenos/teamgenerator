@@ -1,3 +1,7 @@
 .idea
 out
 .project
+.classpath
+teamgenerator.iml
+gradle
+tmp

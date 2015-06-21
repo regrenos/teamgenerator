@@ -1,12 +1,9 @@
 package test.parsing;
 
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import parsing.XLSXParser;
-import pkg.Group;
-import pkg.Student;
+import representation.Group;
+import representation.Student;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;

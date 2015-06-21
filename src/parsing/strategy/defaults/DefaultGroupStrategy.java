@@ -1,15 +1,15 @@
 package parsing.strategy.defaults;
 
 import parsing.strategy.GroupStrategy;
-import pkg.EmptyStudent;
-import pkg.Group;
-import pkg.Student;
+import representation.EmptyStudent;
+import representation.Group;
+import representation.Student;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This strategy is the default {@link GroupStrategy}, it assumes {@link pkg.Student} names are listed in the cells of
+ * This strategy is the default {@link GroupStrategy}, it assumes {@link representation.Student} names are listed in the cells of
  * each row, with the cell text being "lastName, firstName." Each row defines a group.
  * <p>
  * Created by steve on 6/8/15.

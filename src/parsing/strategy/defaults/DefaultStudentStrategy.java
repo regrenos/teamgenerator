@@ -1,13 +1,13 @@
 package parsing.strategy.defaults;
 
 import parsing.strategy.StudentStrategy;
-import pkg.EmptyStudent;
-import pkg.Student;
+import representation.EmptyStudent;
+import representation.Student;
 
 import java.util.List;
 
 /**
- * This strategy is the default {@link StudentStrategy}, it assumes {@link pkg.Student} names are in the first cell of
+ * This strategy is the default {@link StudentStrategy}, it assumes {@link representation.Student} names are in the first cell of
  * each row, with the cell text being "lastName, firstName."
  * <p>
  * Created by steve on 6/8/15.

@@ -6,8 +6,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
-import parsing.strategy.defaults.DefaultGroupStrategy;
-import parsing.strategy.defaults.DefaultStudentStrategy;
 
 import java.io.IOException;
 import java.io.InputStream;

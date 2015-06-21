@@ -2,8 +2,6 @@ package parsing;
 
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
-import parsing.strategy.defaults.DefaultGroupStrategy;
-import parsing.strategy.defaults.DefaultStudentStrategy;
 
 import java.io.BufferedReader;
 import java.io.IOException;

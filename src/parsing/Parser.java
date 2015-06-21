@@ -1,28 +1,18 @@
 package parsing;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import parsing.strategy.GroupStrategy;
 import parsing.strategy.StudentStrategy;
 import parsing.strategy.defaults.DefaultGroupStrategy;
 import parsing.strategy.defaults.DefaultStudentStrategy;
-import pkg.EmptyStudent;
-import pkg.Group;
-import pkg.SectionGrouping;
-import pkg.Student;
+import representation.EmptyStudent;
+import representation.Group;
+import representation.SectionGrouping;
+import representation.Student;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * The Parser class exposes methods for parsing input files into objects used by the group generation algorithm.
@@ -44,9 +34,9 @@ public abstract class Parser {
     }
 
     /**
-     * Parse a (spread)sheet as a list of {@link pkg.Student}s.
+     * Parse a (spread)sheet as a list of {@link representation.Student}s.
      * @param file the input file
-     * @return a list of valid {@link pkg.Student}s parsed from the file
+     * @return a list of valid {@link representation.Student}s parsed from the file
      * @throws IOException if there are errors reading the file
      */
     public List<Student> parseSheetOfStudents(InputStream file) throws IOException{
@@ -58,9 +48,9 @@ public abstract class Parser {
     }
 
     /**
-     * Parse a (spread)sheet as a list of {@link pkg.Group}s.
+     * Parse a (spread)sheet as a list of {@link representation.Group}s.
      * @param file the input file
-     * @return a list of valid {@link pkg.Group}s parsed from the file
+     * @return a list of valid {@link representation.Group}s parsed from the file
      * @throws IOException if there are errors reading the file
      */
     public List<Group> parseSheetOfGroups(InputStream file) throws IOException{
@@ -71,9 +61,9 @@ public abstract class Parser {
     }
 
     /**
-     * Parse a (spread)sheet as a {@link pkg.SectionGrouping}.
+     * Parse a (spread)sheet as a {@link representation.SectionGrouping}.
      * @param file the input file
-     * @return a valid {@link pkg.SectionGrouping} parsed from the file
+     * @return a valid {@link representation.SectionGrouping} parsed from the file
      * @throws IOException if there are errors reading the file
      */
     public SectionGrouping parseSheetAsSectionGrouping(InputStream file) throws IOException{
