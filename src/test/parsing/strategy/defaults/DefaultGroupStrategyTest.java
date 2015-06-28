@@ -2,9 +2,9 @@ package test.parsing.strategy.defaults;
 
 import org.junit.Test;
 import parsing.strategy.defaults.DefaultGroupStrategy;
-import pkg.EmptyStudent;
-import pkg.Group;
-import pkg.Student;
+import representation.EmptyStudent;
+import representation.Group;
+import representation.Student;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

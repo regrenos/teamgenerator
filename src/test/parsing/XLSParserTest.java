@@ -1,6 +1,5 @@
 package test.parsing;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -8,8 +7,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
 import parsing.XLSParser;
-import pkg.Group;
-import pkg.Student;
+import representation.Group;
+import representation.Student;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;
