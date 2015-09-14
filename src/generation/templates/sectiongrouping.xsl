@@ -21,7 +21,7 @@
     </xsl:template>
     <xsl:template match="memberGroup">
         <fo:block padding-after="10pt">
-            <fo:table inline-progression-dimension="auto" table-layout="auto">
+            <fo:table inline-progression-dimension="auto" table-layout="auto" keep-together.within-page="always">
                 <fo:table-column column-width="proportional-column-width(1)"/>
                 <fo:table-column column-width="proportional-column-width(1)" border="solid 0.1mm black"/>
                 <fo:table-column column-width="proportional-column-width(1)"/>

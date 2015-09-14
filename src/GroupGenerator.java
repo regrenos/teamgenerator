@@ -1,6 +1,9 @@
 import generation.PDFGenerator;
+import parsing.CSVParser;
 import parsing.Parser;
 import parsing.XLSXParser;
+import parsing.strategy.propername.ProperNameGroupStrategy;
+import parsing.strategy.propername.ProperNameStudentStrategy;
 import representation.Group;
 import representation.SectionGrouping;
 import representation.Student;
@@ -41,10 +44,20 @@ public class GroupGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        File input = new File("examples/input/sample_students_default.xlsx");
+        File input = new File("mappingfile.csv");
         FileInputStream inputStream = new FileInputStream(input);
-        Parser parser = new XLSXParser();
+        Parser parser = new CSVParser(new ProperNameStudentStrategy(), new ProperNameGroupStrategy());
         List<Student> students = parser.parseSheetOfStudents(inputStream);
+        List<Group> previousGroups =  parser.parseSheetOfGroups(inputStream);
+        for (Group group : previousGroups){
+            for (Student student : group) {
+                for (Student member : group) {
+                    if (!student.equals(member)) {
+                        student.addCollaborator(member);
+                    }
+                }
+            }
+        }
 
         // TODO: only retry until success?
         GroupGenerator generator = new GroupGenerator(NUM_GROUPINGS, students);
